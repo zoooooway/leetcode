@@ -4,5 +4,6 @@
             "folder": "",
             "filename": "${id}.${kebab-case-name}.${ext}"
         }
-    }
+    },
+    "commentTranslate.source": "zoooooway.comment-translate-plugin-baidu-baidu"
 }
