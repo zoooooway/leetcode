@@ -15,6 +15,9 @@ type TreeNode struct {
 }
 
 // @lc code=start
+var pre []int
+var in []int
+
 func buildTree(preorder []int, inorder []int) *TreeNode {
 	// 假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
 
@@ -32,30 +35,34 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 		return nil
 	}
 
+	pre = preorder
+	in = inorder
+
 	root := TreeNode{Val: preorder[0]}
-	findRoot(&root, preorder, inorder)
+	findRoot(&root, 0, len(inorder)-1, 0)
 	return &root
 }
 
-func findRoot(root *TreeNode, preorder []int, inorder []int) {
-	root.Val = preorder[0]
-	if len(preorder) == 1 {
+func findRoot(root *TreeNode, l, r, ridx int) {
+
+	root.Val = pre[ridx]
+	if r-l == 0 {
 		return
 	}
 
-	for i, len := 0, len(inorder); i < len; i++ {
-		if inorder[i] == root.Val {
+	for i := l; i <= r; i++ {
+		if in[i] == root.Val {
 
-			if i > 0 {
+			if i > l {
 				// 左
 				root.Left = &TreeNode{}
-				findRoot(root.Left, preorder[1:i+1], inorder[:i])
+				findRoot(root.Left, l, i-1, ridx+1)
 			}
 
-			if i < len-1 {
+			if i < r {
 				// 右
 				root.Right = &TreeNode{}
-				findRoot(root.Right, preorder[i+1:], inorder[i+1:])
+				findRoot(root.Right, i+1, r, ridx+i-l+1)
 			}
 
 		}
