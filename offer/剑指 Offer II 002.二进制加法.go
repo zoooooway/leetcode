@@ -16,7 +16,11 @@ import (
 var m map[byte]string = map[byte]string{1: "1", 0: "0"}
 
 func addBinary(a string, b string) string {
-	u, d := sort(a, b)
+	u, d := a, b
+	if len(a) < len(b) {
+		u, d = b, a
+	}
+
 	ui := len(u) - 1
 	ud := len(d) - 1
 
@@ -65,13 +69,6 @@ func addBinary(a string, b string) string {
 	}
 	return sb.String()
 
-}
-
-func sort(a, b string) (string, string) {
-	if len(a) < len(b) {
-		return b, a
-	}
-	return a, b
 }
 
 // @lc code=end
