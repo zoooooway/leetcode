@@ -14,6 +14,10 @@ func minSubArrayLen(target int, nums []int) int {
 	// target和数组中的元素都为正整数
 	// 要求连续的话应该可以使用滑动窗口来解
 
+	// O(n log(n))时间复杂度的解法需要使用前缀和
+	// 元素都为正整数，因此前缀和数组满足单调递增
+	// todo 前缀和的实现
+
 	res := math.MaxInt
 	for s, l, r := 0, 0, 0; r < len(nums); {
 		if s < target {
